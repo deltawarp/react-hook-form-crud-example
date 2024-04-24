@@ -21,6 +21,8 @@ function AddEdit({ history, match }) {
         email: Yup.string()
             .email('Email is invalid')
             .required('Email is required'),
+        phoneNumber: Yup.string()
+            .required('Phone is required.'),    
         role: Yup.string()
             .required('Role is required'),
         password: Yup.string()
@@ -68,7 +70,7 @@ function AddEdit({ history, match }) {
         if (!isAddMode) {
             // get user and set form fields
             userService.getById(id).then(user => {
-                const fields = ['title', 'firstName', 'lastName', 'email', 'role'];
+                const fields = ['title', 'firstName', 'lastName', 'email', 'phoneNumber', 'role'];
                 fields.forEach(field => setValue(field, user[field]));
             });
         }
@@ -105,6 +107,11 @@ function AddEdit({ history, match }) {
                     <label>Email</label>
                     <input name="email" type="text" ref={register} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.email?.message}</div>
+                </div>
+                <div className="form-group col-7">
+                    <label>Phone Number</label>
+                    <input name="phoneNumber" type="text" ref={register} className={`form-control ${errors.phoneNumber ? 'is-invalid' : ''}`} />
+                    <div className="invalid-feedback">{errors.phoneNumber?.message}</div>
                 </div>
                 <div className="form-group col">
                     <label>Role</label>
